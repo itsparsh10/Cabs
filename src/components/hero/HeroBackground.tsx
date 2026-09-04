@@ -11,12 +11,6 @@ export default function HeroBackground() {
         sizes="100vw"
         className="object-cover object-center"
       />
-      {/* Soft gradient fade for text legibility while keeping the entire background image vivid */}
-      <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/30 to-transparent pointer-events-none"></div>
     </div>
   )
 }
-
-
-
-

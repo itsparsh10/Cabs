@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 interface SectionHeadingProps {
@@ -5,6 +6,7 @@ interface SectionHeadingProps {
   title: string
   align?: "left" | "center"
   buttonText?: string
+  buttonLink?: string
   onButtonClick?: () => void
   className?: string
 }
@@ -14,6 +16,7 @@ export default function SectionHeading({
   title,
   align = "center",
   buttonText,
+  buttonLink,
   className = "",
 }: SectionHeadingProps) {
   if (buttonText) {
@@ -23,9 +26,18 @@ export default function SectionHeading({
           <span className="text-[#FFB800] font-extrabold text-xs tracking-widest uppercase block mb-2">{eyebrow}</span>
           <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">{title}</h2>
         </div>
-        <button className="hidden md:flex items-center gap-1.5 border border-slate-200 bg-white hover:bg-gray-50 text-slate-700 px-4 py-2 rounded-xl text-xs font-bold transition-colors shadow-2xs">
-          {buttonText} <ArrowRight className="w-3.5 h-3.5" />
-        </button>
+        {buttonLink ? (
+          <Link
+            href={buttonLink}
+            className="hidden md:flex items-center gap-1.5 border border-slate-200 bg-white hover:bg-gray-50 text-slate-700 px-4 py-2 rounded-xl text-xs font-bold transition-colors shadow-2xs"
+          >
+            {buttonText} <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        ) : (
+          <button className="hidden md:flex items-center gap-1.5 border border-slate-200 bg-white hover:bg-gray-50 text-slate-700 px-4 py-2 rounded-xl text-xs font-bold transition-colors shadow-2xs">
+            {buttonText} <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        )}
       </div>
     )
   }

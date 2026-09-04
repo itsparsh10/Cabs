@@ -37,11 +37,11 @@ export function TrustTestimonials() {
                 </li>
               </ul>
             </div>
-            
+
             {/* Right: Stats */}
             <div className="w-full lg:w-7/12 relative">
               <div className="absolute bottom-0 right-0 w-full h-32 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wLDUwIEwxMDAsMjUgTDIwMCw1MCBaIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+')] bg-repeat-x opacity-30 z-0"></div>
-              
+
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative z-10 text-center">
                 <div className="bg-white/80 backdrop-blur rounded-xl p-4">
                   <div className="text-3xl font-black text-primary mb-1">10K+</div>
@@ -72,7 +72,7 @@ export function TrustTestimonials() {
             <p className="text-primary font-bold text-sm tracking-widest uppercase mb-2">Testimonials</p>
             <h2 className="text-3xl font-black text-dark tracking-tight">What Our Customers Say</h2>
           </div>
-          
+
           <div className="flex flex-col xl:flex-row items-center gap-12">
             <div className="w-full xl:w-2/3 grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
               {/* Review 1 */}
@@ -89,7 +89,7 @@ export function TrustTestimonials() {
                   </div>
                 </div>
               </div>
-              
+
               {/* Review 2 */}
               <div className="bg-white p-6 rounded-xl shadow-sm border border-border">
                 <div className="flex gap-1 mb-4">
@@ -123,13 +123,13 @@ export function TrustTestimonials() {
 
             {/* Decorative Car overlapping on right */}
             <div className="hidden xl:block w-1/3 relative h-64">
-               <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[120%] h-full">
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-primary rounded-full z-0 translate-x-12"></div>
-                  {/* Car Placeholder */}
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-full h-48 bg-white border-4 border-border rounded-xl shadow-2xl z-10 flex items-center justify-center transform -rotate-3 overflow-hidden">
-                     <span className="font-black text-xl text-muted/30 uppercase">Car Image</span>
-                  </div>
-               </div>
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[120%] h-full">
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-primary rounded-full z-0 translate-x-12"></div>
+                {/* Car Placeholder */}
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-full h-48 bg-white border-4 border-border rounded-xl shadow-2xl z-10 flex items-center justify-center transform -rotate-3 overflow-hidden">
+                  <span className="font-black text-xl text-muted/30 uppercase">Car Image</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

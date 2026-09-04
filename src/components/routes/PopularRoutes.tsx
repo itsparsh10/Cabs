@@ -9,6 +9,7 @@ export default function PopularRoutes() {
           eyebrow="POPULAR ROUTES" 
           title="Most Booked Routes" 
           buttonText="View All Routes"
+          buttonLink="/routes"
         />
         <RouteGrid />
       </div>

@@ -1,74 +1,84 @@
-import { MapPin, Navigation, Plane, Umbrella, Briefcase, Car } from "lucide-react";
+import { MapPin, Navigation, Plane, Umbrella, Briefcase, Car, ArrowRight } from "lucide-react";
 
 const packages = [
   {
     title: "Local 8 Hours / 80 KM",
     description: "Perfect for local travel",
-    price: "₹2,499",
-    icon: <Car className="w-8 h-8 text-primary" />,
+    icon: <Car className="w-6 h-6 text-amber-500" />,
   },
   {
     title: "Outstation",
     description: "One way or round trip",
-    price: "₹6,499",
-    icon: <Navigation className="w-8 h-8 text-primary" />,
+    icon: <Navigation className="w-6 h-6 text-amber-500" />,
   },
   {
     title: "Airport Transfer",
     description: "Pickup & drop service",
-    price: "₹999",
-    icon: <Plane className="w-8 h-8 text-primary" />,
+    icon: <Plane className="w-6 h-6 text-amber-500" />,
   },
   {
     title: "Weekend Trip",
     description: "2N/3D comfortable trip",
-    price: "₹9,999",
-    icon: <Umbrella className="w-8 h-8 text-primary" />,
+    icon: <Umbrella className="w-6 h-6 text-amber-500" />,
   },
   {
     title: "Corporate Travel",
     description: "Business travel solution",
-    price: "₹8,999",
-    icon: <Briefcase className="w-8 h-8 text-primary" />,
+    icon: <Briefcase className="w-6 h-6 text-amber-500" />,
   }
 ];
 
 export function Packages() {
   return (
-    <section id="packages" className="py-16 bg-white">
+    <section id="packages" className="py-16 bg-white border-t border-slate-100">
       <div className="container mx-auto px-4 lg:px-12 max-w-[1400px]">
-        
+
         <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
           <div className="text-center md:text-left">
-            <p className="text-primary font-bold text-sm tracking-widest uppercase mb-2">Travel Packages</p>
-            <h2 className="text-3xl font-black text-dark tracking-tight">Best Packages For You</h2>
+            <p className="text-amber-500 font-extrabold text-xs tracking-widest uppercase mb-2">Travel Packages</p>
+            <h2 className="text-3xl font-black text-slate-900 tracking-tight">Best Packages For You</h2>
           </div>
-          <button className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full border border-border font-bold text-sm text-dark hover:border-primary transition-colors bg-white">
-            View All Packages <span className="text-muted">&rarr;</span>
-          </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          {packages.map((pkg, index) => (
-            <div key={index} className="bg-white rounded-xl p-6 border border-border/60 hover:shadow-md hover:border-primary/50 transition-all flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-surface-warm flex items-center justify-center mb-4 border border-border/50">
-                {pkg.icon}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+          {packages.map((pkg, index) => {
+            const whatsappMessage = encodeURIComponent(
+              `Hello Lucifer Cabs! I am interested in the ${pkg.title} package (${pkg.description}). Please send me the best custom quote.`
+            )
+            const whatsappUrl = `https://wa.me/919876543210?text=${whatsappMessage}`
+
+            return (
+              <div key={index} className="group flex flex-col justify-between rounded-2xl border border-slate-100 bg-white p-5 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-amber-200 hover:shadow-xl">
+                <div>
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 text-amber-500 transition-colors group-hover:bg-[#FFB800] group-hover:text-slate-950">
+                    {pkg.icon}
+                  </div>
+                  <h3 className="mb-1 text-sm font-extrabold text-slate-900">{pkg.title}</h3>
+                  <p className="text-xs font-medium text-slate-500 leading-relaxed min-h-[32px]">{pkg.description}</p>
+                </div>
+
+                <div className="mt-4 border-t border-slate-100 pt-3">
+                  <div>
+                    <span className="text-xs font-extrabold text-amber-600 bg-amber-50/80 px-2.5 py-1 rounded-full border border-amber-200/60 inline-block">Custom Quote</span>
+                    <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mt-1">Best Fare Guaranteed</span>
+                  </div>
+
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl border border-amber-300/80 bg-amber-50/60 py-2 text-xs font-bold text-amber-700 transition-all group-hover:bg-[#FFB800] group-hover:text-slate-950"
+                  >
+                    <span>Get Instant Quote</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
               </div>
-              <h3 className="text-[15px] font-bold text-dark mb-1">{pkg.title}</h3>
-              <p className="text-muted text-xs mb-5 flex-grow">{pkg.description}</p>
-              
-              <div className="mb-5">
-                <span className="text-xl font-bold text-primary block">{pkg.price}</span>
-                <span className="text-[10px] font-bold text-muted uppercase">Onwards</span>
-              </div>
-              
-              <button className="font-bold text-primary hover:text-primary-bright text-xs inline-flex items-center gap-1.5 transition-colors">
-                Book Now <span className="text-primary">&rarr;</span>
-              </button>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
   );
 }
+

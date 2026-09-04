@@ -15,11 +15,6 @@ export default function Packages() {
               Best Packages For You
             </h2>
           </div>
-
-          <button className="hidden sm:flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-xs sm:text-sm font-bold text-slate-800 transition-all hover:border-amber-400 hover:bg-amber-50/50 shadow-2xs">
-            <span>View All Packages</span>
-            <ArrowRight className="h-4 w-4 text-amber-500" strokeWidth={2.5} />
-          </button>
         </div>
 
         <PackageGrid />
