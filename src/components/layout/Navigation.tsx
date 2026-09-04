@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X, Phone, ChevronDown } from "lucide-react"
@@ -30,6 +30,7 @@ const TaxiLogoIcon = () => (
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeHash, setActiveHash] = useState("")
   const pathname = usePathname()
 
   const navLinks = [
@@ -42,11 +43,59 @@ export default function Navigation() {
     { name: "Contact", href: "/#contact" },
   ]
 
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const handleScroll = () => {
+      if (pathname !== "/") return
+      const sections = ["services", "routes", "fleet", "packages", "contact"]
+      let currentSection = ""
+
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          if (rect.top <= 200 && rect.bottom >= 150) {
+            currentSection = `/#${sectionId}`
+            break
+          }
+        }
+      }
+
+      if (currentSection) {
+        setActiveHash(currentSection)
+      } else if (window.scrollY < 300) {
+        setActiveHash("")
+      }
+    }
+
+    // Set initial hash
+    if (window.location.hash) {
+      setActiveHash(`/${window.location.hash}`)
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [pathname])
+
   const isLinkActive = (href: string) => {
-    if (href === "/") return pathname === "/"
-    if (href === "/about") return pathname === "/about"
-    if (href === "/routes") return pathname === "/routes"
+    if (pathname === "/about") return href === "/about"
+    if (pathname === "/routes") return href === "/routes"
+    if (pathname === "/") {
+      if (href === "/") return activeHash === "" || activeHash === "/#hero"
+      return activeHash === href
+    }
     return false
+  }
+
+  const handleLinkClick = (href: string) => {
+    if (href.includes("#")) {
+      const hashPart = href.substring(href.indexOf("#"))
+      setActiveHash(`/${hashPart}`)
+    } else if (href === "/") {
+      setActiveHash("")
+    }
+    setMobileMenuOpen(false)
   }
 
   return (
@@ -76,13 +125,14 @@ export default function Navigation() {
                 <div key={link.name} className="relative group py-6">
                   <Link
                     href={link.href}
+                    onClick={() => handleLinkClick(link.href)}
                     className={`relative text-sm font-semibold transition-colors py-2 ${
                       active ? "text-[#FFB800]" : "text-slate-500 hover:text-slate-900"
                     }`}
                   >
                     {link.name}
                     {active && (
-                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-[3px] bg-[#FFB800] rounded-full" />
+                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-[3px] bg-[#FFB800] rounded-full transition-all duration-300 animate-in fade-in zoom-in-75" />
                     )}
                   </Link>
                 </div>
