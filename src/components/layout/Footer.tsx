@@ -2,6 +2,23 @@ import Image from "next/image"
 import Link from "next/link"
 import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react"
 
+const TaxiLogoIcon = () => (
+  <svg width="40" height="32" viewBox="0 0 48 38" fill="none" xmlns="http://www.w3.org/2003/svg" className="shrink-0">
+    <rect x="18" y="1" width="12" height="5" rx="1.5" fill="#FFB800" stroke="#D97706" strokeWidth="1"/>
+    <text x="24" y="4.8" fontSize="3.2" fontWeight="800" fill="#0F172A" textAnchor="middle">TAXI</text>
+    <path d="M12 12C12 8.5 15 6 18 6H30C33 6 36 8.5 36 12L39 19V30C39 31.5 37.8 32.5 36.5 32.5H35.5C34.2 32.5 33 31.5 33 30V29H15V30C15 31.5 13.8 32.5 12.5 32.5H11.5C10.2 32.5 9 31.5 9 30V19L12 12Z" fill="#FFB800"/>
+    <path d="M14 13.5C14.5 11 16.5 9.5 19 9.5H29C31.5 9.5 33.5 11 34 13.5L35.2 18H12.8L14 13.5Z" fill="#1E293B"/>
+    <rect x="6" y="17" width="3" height="4" rx="1" fill="#D97706"/>
+    <rect x="39" y="17" width="3" height="4" rx="1" fill="#D97706"/>
+    <rect x="12" y="21" width="24" height="6" rx="2" fill="#D97706"/>
+    <rect x="18" y="22.5" width="12" height="3" rx="1" fill="#1E293B"/>
+    <circle cx="13.5" cy="21" r="2.5" fill="#FFF" stroke="#E2E8F0" strokeWidth="0.5"/>
+    <circle cx="34.5" cy="21" r="2.5" fill="#FFF" stroke="#E2E8F0" strokeWidth="0.5"/>
+    <rect x="11" y="29" width="4" height="6" rx="1.5" fill="#0F172A"/>
+    <rect x="33" y="29" width="4" height="6" rx="1.5" fill="#0F172A"/>
+  </svg>
+)
+
 const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
     <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
@@ -25,19 +42,17 @@ export default function Footer() {
 
           {/* Col 1: Brand Info */}
           <div className="lg:col-span-1">
-            <Link href="/" className="mb-4 flex items-center gap-3">
-              <div className="relative h-9 w-9 overflow-hidden rounded-xl bg-amber-400/20 p-1 flex items-center justify-center">
-                <Image
-                  src="/assets/logo/lucifer-cabs.png"
-                  alt="Lucifer Cabs"
-                  width={36}
-                  height={36}
-                  className="h-7 w-7 object-contain"
-                />
+            <Link href="/" className="mb-4 flex items-center gap-2.5 group">
+              <TaxiLogoIcon />
+              <div className="flex flex-col leading-tight">
+                <div className="flex items-center text-xl font-extrabold tracking-tight">
+                  <span className="text-white">Lucifer</span>
+                  <span className="text-[#FFB800] ml-1">Cabs</span>
+                </div>
+                <span className="text-[11px] font-normal text-slate-400 tracking-normal -mt-0.5">
+                  Travel with Comfort
+                </span>
               </div>
-              <span className="text-lg font-black text-white tracking-tight">
-                Lucifer <span className="text-[#FFB800]">Cabs</span>
-              </span>
             </Link>
             <p className="mb-5 text-sm leading-relaxed text-slate-400 font-medium">
               Reliable taxi service in Surat for one-way, round-trip, local and airport travel. Your journey, our responsibility.
@@ -49,7 +64,7 @@ export default function Footer() {
               <a href="#" aria-label="Instagram" className="rounded-lg bg-slate-900 p-2 text-slate-400 transition-colors hover:bg-amber-400 hover:text-slate-950">
                 <InstagramIcon className="h-4 w-4" />
               </a>
-              <a href="https://wa.me/919876543210" aria-label="WhatsApp" className="rounded-lg bg-slate-900 p-2 text-slate-400 transition-colors hover:bg-emerald-500 hover:text-white">
+              <a href="https://wa.me/917069300605" aria-label="WhatsApp" className="rounded-lg bg-slate-900 p-2 text-slate-400 transition-colors hover:bg-emerald-500 hover:text-white">
                 <MessageCircle className="h-4 w-4" />
               </a>
             </div>
