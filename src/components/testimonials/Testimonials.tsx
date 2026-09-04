@@ -29,17 +29,21 @@ export default function Testimonials() {
             </div>
           </div>
 
-          {/* Right Side: Prominent Large Car Graphic shifted slightly for perfect visual alignment */}
-          <div className="w-full lg:w-[40%] relative flex items-center justify-center shrink-0 mt-6 lg:mt-0 lg:pl-4">
-            <div className="relative w-80 h-80 sm:w-[440px] sm:h-[440px] lg:w-[500px] lg:h-[500px] shrink-0 transition-transform duration-300 hover:scale-105 transform lg:-translate-x-1 lg:-translate-y-1">
-              <Image
-                src="/images/testimonials/testimonial-car-side.png"
-                alt="Lucifer Cabs Premium Fleet"
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 550px"
-                className="object-contain drop-shadow-2xl"
-              />
+          {/* Right Side: Prominent Large Car Graphic with Amber Backdrop Circle matching reference screenshot */}
+          <div className="w-full lg:w-[40%] relative flex items-center justify-center shrink-0 mt-8 lg:mt-0 lg:pl-4">
+            <div className="relative w-64 h-64 sm:w-[380px] sm:h-[380px] lg:w-[440px] lg:h-[440px] shrink-0 flex items-center justify-center">
+              {/* Amber Circle Backdrop matching reference screenshot */}
+              <div className="absolute w-52 h-52 sm:w-[320px] sm:h-[320px] lg:w-[360px] lg:h-[360px] rounded-full bg-[#FFB800] z-0 -top-1" />
+              <div className="relative w-full h-full z-10 transition-transform duration-300 hover:scale-105">
+                <Image
+                  src="/images/testimonials/testimonial-car-side.png"
+                  alt="Lucifer Cabs Premium Fleet"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 450px"
+                  className="object-contain drop-shadow-2xl"
+                />
+              </div>
             </div>
           </div>
 

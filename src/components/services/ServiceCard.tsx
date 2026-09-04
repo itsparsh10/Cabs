@@ -1,5 +1,6 @@
 import { Service } from "@/data/mockData"
 import { Car, RefreshCw, Plane, MapPin, ArrowRight } from "lucide-react"
+import { getServiceWhatsAppUrl } from "@/lib/whatsapp"
 
 const ICONS: Record<string, React.ElementType> = {
   Car,
@@ -14,6 +15,7 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ service }: ServiceCardProps) {
   const Icon = ICONS[service.icon] || MapPin
+  const whatsappUrl = getServiceWhatsAppUrl(service.title)
 
   return (
     <div className="bg-white border border-gray-100/90 rounded-2xl p-6 sm:p-7 shadow-2xs hover:shadow-md transition-all duration-200 group flex flex-col justify-between hover:-translate-y-0.5">
@@ -29,9 +31,15 @@ export default function ServiceCard({ service }: ServiceCardProps) {
         </div>
       </div>
 
-      <button className="flex items-center text-[#FFB800] font-bold text-xs hover:text-[#e6a600] transition-colors pt-4 border-t border-gray-50 w-full">
-        {service.linkText} <ArrowRight className="w-3.5 h-3.5 ml-1" />
-      </button>
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center text-[#FFB800] font-bold text-xs hover:text-amber-600 transition-colors pt-4 border-t border-gray-50 w-full"
+      >
+        <span>{service.linkText}</span>
+        <ArrowRight className="w-3.5 h-3.5 ml-1" />
+      </a>
     </div>
   )
 }

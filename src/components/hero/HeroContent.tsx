@@ -2,7 +2,7 @@ import { CheckCircle2 } from "lucide-react"
 
 export default function HeroContent() {
   return (
-    <div className="flex flex-col justify-center transform -translate-y-5 lg:-translate-y-27">
+    <div className="flex flex-col justify-center transform translate-y-0 lg:-translate-y-27">
       {/* Tagline */}
       <div className="mb-3">
         <span className="text-xs sm:text-sm font-extrabold tracking-widest text-amber-500 uppercase">

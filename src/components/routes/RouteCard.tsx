@@ -1,5 +1,6 @@
 import { Route } from "@/data/mockData"
 import { ArrowRight } from "lucide-react"
+import { getRouteWhatsAppUrl } from "@/lib/whatsapp"
 
 const SuratLandmark = () => (
   <svg width="44" height="38" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2003/svg" className="shrink-0">
@@ -73,6 +74,8 @@ interface RouteCardProps {
 }
 
 export default function RouteCard({ route }: RouteCardProps) {
+  const whatsappUrl = getRouteWhatsAppUrl(route.from, route.to)
+
   const getLandmarkIcon = () => {
     if (route.to === "Udaipur" || route.from === "Udaipur") return <UdaipurLandmark />
     if (route.to === "Ujjain" || route.from === "Ujjain") return <UjjainLandmark />
@@ -82,17 +85,25 @@ export default function RouteCard({ route }: RouteCardProps) {
   }
 
   return (
-    <div className="bg-white border border-gray-100/90 rounded-xl p-4 flex items-center gap-3.5 shadow-2xs hover:shadow-md transition-all duration-200 group cursor-pointer hover:-translate-y-0.5">
-      <div className="w-12 h-12 bg-amber-50/60 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-[#FFB800]/20 transition-colors p-1">
-        {getLandmarkIcon()}
-      </div>
-      <div>
-        <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-1.5 whitespace-nowrap">
-          {route.from} <ArrowRight className="w-3 h-3 text-gray-400 shrink-0" /> {route.to}
-        </h3>
-        <button className="text-[#FFB800] font-bold text-xs mt-0.5 flex items-center gap-1 hover:text-[#e6a600] transition-colors">
-          {route.linkText} <ArrowRight className="w-3 h-3" />
-        </button>
+    <div className="bg-white border border-gray-100/90 rounded-xl p-4 flex items-center justify-between gap-3.5 shadow-2xs hover:shadow-md transition-all duration-200 group hover:-translate-y-0.5">
+      <div className="flex items-center gap-3.5">
+        <div className="w-12 h-12 bg-amber-50/60 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-[#FFB800]/20 transition-colors p-1">
+          {getLandmarkIcon()}
+        </div>
+        <div>
+          <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-1.5 whitespace-nowrap">
+            {route.from} <ArrowRight className="w-3 h-3 text-gray-400 shrink-0" /> {route.to}
+          </h3>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#FFB800] font-bold text-xs mt-0.5 flex items-center gap-1 hover:text-amber-600 transition-colors"
+          >
+            <span>{route.linkText}</span>
+            <ArrowRight className="w-3 h-3" />
+          </a>
+        </div>
       </div>
     </div>
   )
