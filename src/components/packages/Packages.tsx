@@ -8,8 +8,6 @@ export default function Packages() {
         <SectionHeading
           eyebrow="TRAVEL PACKAGES"
           title="Best Packages For You"
-          buttonText="View All"
-          buttonLink="/#packages"
         />
 
         <PackageGrid />

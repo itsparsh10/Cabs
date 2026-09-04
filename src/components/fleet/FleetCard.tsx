@@ -15,14 +15,14 @@ export default function FleetCard({ vehicle }: FleetCardProps) {
       className="group flex flex-col justify-between rounded-xl bg-white p-3 sm:p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md border border-slate-200/80 shadow-2xs hover:border-amber-300"
     >
       <div>
-        {/* Vehicle Image Container - Slightly smaller height & padding on mobile for optimal visual proportion */}
-        <div className="relative mx-auto mb-2.5 h-20 sm:h-28 lg:h-32 w-full overflow-hidden flex items-center justify-center bg-white rounded-lg">
+        {/* Vehicle Image Container - Pure white background matching image background for 100% seamless blend */}
+        <div className="relative mx-auto mb-2.5 h-24 sm:h-28 lg:h-32 w-full overflow-hidden flex items-center justify-center bg-white rounded-lg">
           <Image
             src={vehicle.image}
             alt={vehicle.name}
             fill
             sizes="(min-width: 1024px) 12vw, (min-width: 640px) 25vw, 50vw"
-            className="object-contain p-2 sm:p-1 group-hover:scale-105 transition-transform duration-300 mix-blend-multiply"
+            className="object-contain p-1 group-hover:scale-105 transition-transform duration-300 mix-blend-multiply"
           />
         </div>
 

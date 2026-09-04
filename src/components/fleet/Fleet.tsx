@@ -8,8 +8,6 @@ export default function Fleet() {
         <SectionHeading
           eyebrow="OUR FLEET"
           title="Choose Your Comfortable Ride"
-          buttonText="View All"
-          buttonLink="/#fleet"
         />
 
         <FleetGrid />
