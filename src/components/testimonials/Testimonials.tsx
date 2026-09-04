@@ -34,7 +34,7 @@ export default function Testimonials() {
             <div className="relative w-64 h-64 sm:w-[380px] sm:h-[380px] lg:w-[440px] lg:h-[440px] shrink-0 flex items-center justify-center">
               {/* Amber Circle Backdrop matching reference screenshot */}
               <div className="absolute w-52 h-52 sm:w-[320px] sm:h-[320px] lg:w-[360px] lg:h-[360px] rounded-full bg-[#FFB800] z-0 -top-1" />
-              <div className="relative w-full h-full z-10 transition-transform duration-300 hover:scale-105">
+              <div className="relative w-full h-full z-10 transition-transform duration-300 hover:scale-105 translate-y-5 sm:translate-y-7">
                 <Image
                   src="/images/testimonials/testimonial-car-side.png"
                   alt="Lucifer Cabs Premium Fleet"
