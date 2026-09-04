@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, Phone, ChevronDown } from "lucide-react"
+import { Menu, X, Phone } from "lucide-react"
 
 const WhatsAppIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2003/svg">
@@ -32,6 +32,8 @@ export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeHash, setActiveHash] = useState("")
   const pathname = usePathname()
+  const isClickingRef = useRef(false)
+  const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -47,15 +49,16 @@ export default function Navigation() {
     if (typeof window === "undefined") return
 
     const handleScroll = () => {
-      if (pathname !== "/") return
-      const sections = ["services", "routes", "fleet", "packages", "contact"]
+      if (isClickingRef.current || pathname !== "/") return
+
+      const sections = ["services", "fleet", "packages", "contact"]
       let currentSection = ""
 
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId)
         if (element) {
           const rect = element.getBoundingClientRect()
-          if (rect.top <= 200 && rect.bottom >= 150) {
+          if (rect.top <= 250 && rect.bottom >= 150) {
             currentSection = `/#${sectionId}`
             break
           }
@@ -69,8 +72,7 @@ export default function Navigation() {
       }
     }
 
-    // Set initial hash
-    if (window.location.hash) {
+    if (window.location.hash && pathname === "/") {
       setActiveHash(`/${window.location.hash}`)
     }
 
@@ -88,14 +90,50 @@ export default function Navigation() {
     return false
   }
 
-  const handleLinkClick = (href: string) => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    setMobileMenuOpen(false)
+
     if (href.includes("#")) {
       const hashPart = href.substring(href.indexOf("#"))
+      const targetId = hashPart.replace("#", "")
+
       setActiveHash(`/${hashPart}`)
+      isClickingRef.current = true
+
+      if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current)
+      clickTimeoutRef.current = setTimeout(() => {
+        isClickingRef.current = false
+      }, 1000)
+
+      if (pathname === "/") {
+        const targetElement = document.getElementById(targetId)
+        if (targetElement) {
+          e.preventDefault()
+          const navOffset = 80
+          const elementPosition = targetElement.getBoundingClientRect().top
+          const offsetPosition = elementPosition + window.pageYOffset - navOffset
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          })
+          window.history.pushState(null, "", hashPart)
+        }
+      }
     } else if (href === "/") {
       setActiveHash("")
+      isClickingRef.current = true
+      if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current)
+      clickTimeoutRef.current = setTimeout(() => {
+        isClickingRef.current = false
+      }, 1000)
+
+      if (pathname === "/") {
+        e.preventDefault()
+        window.scrollTo({ top: 0, behavior: "smooth" })
+        window.history.pushState(null, "", "/")
+      }
     }
-    setMobileMenuOpen(false)
   }
 
   return (
@@ -125,21 +163,20 @@ export default function Navigation() {
                 <div key={link.name} className="relative group py-6">
                   <Link
                     href={link.href}
-                    onClick={() => handleLinkClick(link.href)}
-                    className={`relative text-sm font-semibold transition-colors py-2 ${
+                    onClick={(e) => handleLinkClick(e, link.href)}
+                    className={`relative text-sm font-semibold py-2 transition-colors duration-150 ${
                       active ? "text-[#FFB800]" : "text-slate-500 hover:text-slate-900"
                     }`}
                   >
                     {link.name}
                     {active && (
-                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-[3px] bg-[#FFB800] rounded-full transition-all duration-300 animate-in fade-in zoom-in-75" />
+                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-[3px] bg-[#FFB800] rounded-full" />
                     )}
                   </Link>
                 </div>
               )
             })}
           </div>
-
 
           {/* Desktop CTA Action Buttons */}
           <div className="hidden items-center gap-3 lg:flex">
@@ -179,7 +216,7 @@ export default function Navigation() {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="absolute left-0 top-20 w-full border-b border-slate-200 bg-white px-6 pb-6 pt-4 shadow-xl lg:hidden transition-all animate-in fade-in slide-in-from-top-2 z-50">
+        <div className="absolute left-0 top-20 w-full border-b border-slate-200 bg-white px-6 pb-6 pt-4 shadow-xl lg:hidden transition-all z-50">
           <div className="flex flex-col space-y-3">
             {navLinks.map((link) => {
               const active = isLinkActive(link.href)
@@ -190,7 +227,7 @@ export default function Navigation() {
                   className={`py-2 text-base font-semibold border-b border-slate-50 transition-colors ${
                     active ? "text-[#FFB800]" : "text-slate-700 hover:text-[#FFB800]"
                   }`}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleLinkClick(e, link.href)}
                 >
                   {link.name}
                 </Link>
@@ -222,5 +259,6 @@ export default function Navigation() {
     </nav>
   )
 }
+
 
 
